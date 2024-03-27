@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Shipping Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    textarea {
+        resize: vertical;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: rgb(196, 0, 88);
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: rgba(36, 55, 70, 0.5) 0px 2px 4px;
+    }
+    button:hover {
+        background-color: #ffffff;
+        color: rgb(196, 0, 88);
+    }
+    .feedback-container {
+        margin-top: 20px;
+        padding: 0px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+    }
+
+    /* Responsive Styling */
+    @media screen and (max-width: 767px) {
+        .container {
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 0;
+            max-width: 80%;
+        }
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1023px) {
+        .container {
+            max-width: 80%;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+        .container {
+            max-width: 600px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Customer Shipping Form</h1>
+    <form id="shippingForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3" required></textarea>
+        
+        <label for="country">Country:</label>
+        <select id="country" name="country" required>
+            <option value="">Select Country</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="UK">UK</option>
+            <option value="Australia">Australia</option>
+            <!-- Add more options as needed -->
+        </select>
+        
+        <button type="submit">Submit Shipping Details</button>
+    </form>
+</div>
+
+<div class="feedback-container" id="feedbackContainer">
+    <!-- Feedback will be displayed here -->
+</div>
+
+<script>
+    document.getElementById("shippingForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        var shippingData = {};
+        formData.forEach(function(value, key) {
+            shippingData[key] = value;
+        });
+        displayFeedback(shippingData);
+        this.reset();
+    });
+
+    function displayFeedback(data) {
+        var feedbackContainer = document.getElementById("feedbackContainer");
+        var feedbackHtml = "<h2>Shipping Details</h2>";
+        feedbackHtml += "<p><strong>Name:</strong> " + data.name + "</p>";
+        feedbackHtml += "<p><strong>Email:</strong> " + data.email + "</p>";
+        feedbackHtml += "<p><strong>Address:</strong> " + data.address + "</p>";
+        feedbackHtml += "<p><strong>Country:</strong> " + data.country + "</p>";
+        feedbackContainer.innerHTML = feedbackHtml;
+    }
+</script>
+
+</body>
+</html>
